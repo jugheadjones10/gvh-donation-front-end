@@ -1,5 +1,7 @@
 import './App.css';
+import PayNow from "./PayNow"
 import React from 'react';
+import { useFormik } from 'formik';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -16,6 +18,29 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
+
+const validate = values => {
+  const errors = {};
+  if (!values.firstName) {
+    errors.firstName = 'Required';
+  } else if (values.firstName.length > 15) {
+    errors.firstName = 'Must be 15 characters or less';
+  }
+
+  if (!values.lastName) {
+    errors.lastName = 'Required';
+  } else if (values.lastName.length > 20) {
+    errors.lastName = 'Must be 20 characters or less';
+  }
+
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+
+  return errors;
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,10 +75,25 @@ function App() {
     setAge(event.target.value);
   };
 
+  const formik = useFormik({
+    initialValues: {
+      fullname: '',
+      email: '',
+      mobilenumber: '',
+      project: ''
+    },
+    validate,
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
   return (
     <div className={classes.root}>
 
-      <Accordion>
+      <PayNow />
+
+      {/* <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           id="panel1a-header"
@@ -66,11 +106,11 @@ function App() {
 
         <AccordionDetails className={classes.accordionDetails}>
 
-          <TextField className={classes.textField} id="full-name" label="Full name (as in NRIC)" variant="filled" />
+          <TextField className={classes.textField} id="fullname" label="Full name (as in NRIC)" variant="filled" />
           <TextField className={classes.textField} id="email" label="Email" variant="filled" />
-          <TextField className={classes.textField} id="mobile-number" label="Mobile Number" variant="filled" />
+          <TextField className={classes.textField} id="mobilenumber" label="Mobile Number" variant="filled" />
           <FormControl variant="filled" className={classes.textField}>
-            <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
+            <InputLabel id="project">Age</InputLabel>
             <Select
               labelId="demo-simple-select-filled-label"
               id="demo-simple-select-filled"
@@ -97,7 +137,7 @@ function App() {
           </Button>
         </AccordionActions>
 
-      </Accordion>
+      </Accordion> */}
 
 
 
