@@ -1,7 +1,6 @@
 import './App.css';
 import PayNow from "./PayNow"
 import React from 'react';
-import { useFormik } from 'formik';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -9,38 +8,6 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import AccordionActions from '@material-ui/core/AccordionActions';
-// import Button from '@material-ui/core/Button';
-// import Divider from '@material-ui/core/Divider';
-// import TextField from '@material-ui/core/TextField';
-// import Select from '@material-ui/core/Select';
-// import FormControl from '@material-ui/core/FormControl';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import FormHelperText from '@material-ui/core/FormHelperText';
-
-const validate = values => {
-  const errors = {};
-  if (!values.firstName) {
-    errors.firstName = 'Required';
-  } else if (values.firstName.length > 15) {
-    errors.firstName = 'Must be 15 characters or less';
-  }
-
-  if (!values.lastName) {
-    errors.lastName = 'Required';
-  } else if (values.lastName.length > 20) {
-    errors.lastName = 'Must be 20 characters or less';
-  }
-
-  if (!values.email) {
-    errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
-  }
-
-  return errors;
-};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,26 +34,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
 function App() {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      fullname: '',
-      email: '',
-      mobilenumber: '',
-      project: ''
-    },
-    validate,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
 
   return (
     <div className={classes.root}>
