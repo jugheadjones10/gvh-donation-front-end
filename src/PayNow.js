@@ -140,14 +140,14 @@ function PayNow() {
                             name="project"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            value={formik.values.mobilenumber}
+                            value={formik.values.project}
                         >
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            <MenuItem value={"AW"}>AW</MenuItem>
+                            <MenuItem value={"GWG"}>GWG</MenuItem>
+                            <MenuItem value={"BBBB"}>BBBB</MenuItem>
                         </Select>
                         {formik.touched.project && formik.errors.project ? (<FormHelperText>{formik.errors.project}</FormHelperText>) : null}
                     </FormControl>
