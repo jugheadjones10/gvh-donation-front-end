@@ -96,36 +96,27 @@ function PayNow() {
                     <TextField
                         className={classes.textField}
                         id="fullname"
-                        name="fullname"
+                        {...formik.getFieldProps('fullname')}
                         label="Full name (as in NRIC)"
                         variant="filled"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.fullname}
                         error={formik.touched.fullname && formik.errors.fullname ? true : false}
                         helperText={formik.touched.fullname && formik.errors.fullname ? formik.errors.fullname : null} />
 
                     <TextField
                         className={classes.textField}
                         id="email"
-                        name="email"
+                        {...formik.getFieldProps('email')}
                         label="Email"
                         variant="filled"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.email}
                         error={formik.touched.email && formik.errors.email ? true : false}
                         helperText={formik.touched.email && formik.errors.email ? formik.errors.email : null} />
 
                     <TextField
                         className={classes.textField}
                         id="mobilenumber"
-                        name="mobilenumber"
+                        {...formik.getFieldProps('mobilenumber')}
                         label="Mobile Number"
                         variant="filled"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.mobilenumber}
                         error={formik.touched.mobilenumber && formik.errors.mobilenumber ? true : false}
                         helperText={formik.touched.mobilenumber && formik.errors.mobilenumber ? formik.errors.mobilenumber : null} />
 
@@ -137,17 +128,18 @@ function PayNow() {
                         <Select
                             labelId="project"
                             id="project"
-                            name="project"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.project}
+                            {...formik.getFieldProps('project')}
                         >
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
-                            <MenuItem value={"AW"}>AW</MenuItem>
-                            <MenuItem value={"GWG"}>GWG</MenuItem>
-                            <MenuItem value={"BBBB"}>BBBB</MenuItem>
+                            <MenuItem value={"Education"}>Education</MenuItem>
+                            <MenuItem value={"Rice for Hope"}>Rice for Hope</MenuItem>
+                            <MenuItem value={"Water Well"}>Water Well</MenuItem>
+                            <MenuItem value={"School Improvement"}>School Improvement</MenuItem>
+                            <MenuItem value={"Skills Training Center in Myanmar"}>Skills Training Center in Myanmar</MenuItem>
+                            <MenuItem value={"Administration and Exploration"}>Administration and Exploration</MenuItem>
+                            <MenuItem value={"Any project that requires the most help"}>Any project that requires the most help</MenuItem>
                         </Select>
                         {formik.touched.project && formik.errors.project ? (<FormHelperText>{formik.errors.project}</FormHelperText>) : null}
                     </FormControl>
