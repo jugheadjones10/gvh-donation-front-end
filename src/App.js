@@ -7,6 +7,7 @@ import Monthly from "./payment-methods/Monthly"
 import QRCode from "./payment-methods/QRCode"
 
 import React from 'react';
+import * as Yup from 'yup';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -24,16 +25,60 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
-  accordionDetails: {
+  largeText: {
+    fontSize: theme.typography.pxToRem(30),
+  },
+  normalText: {
+    fontSize: theme.typography.pxToRem(15),
+  },
+  container: {
+    width: "100%",
     display: 'flex',
     flexDirection: "column",
     alignItems: "center"
+  },
+  textContainer: {
+    width: "60%",
+    display: 'flex',
+    flexDirection: "column",
+    alignItems: "left"
   },
   textField: {
     margin: "8px",
     width: "40%"
   }
 }));
+
+const formikInitialValues = {
+  fullname: '',
+  email: '',
+  mobilenumber: '',
+  project: '',
+  amount: '',
+  chequenumber: '',
+  country: ''
+}
+
+const formikValidation = {
+  fullname: Yup
+    .string()
+    .required('Required'),
+  email: Yup
+    .string()
+    .email('Invalid email address')
+    .required('Required'),
+  mobilenumber: Yup
+    .number()
+    .typeError("Invalid mobile number")
+    .positive("Invalid mobile number")
+    .integer("Invalid mobile number")
+    .required('Required'),
+  project: Yup
+    .string()
+    .required('Required'),
+  type: Yup
+    .string(),
+}
 
 
 function App() {
@@ -42,12 +87,42 @@ function App() {
   return (
     <div className={classes.root}>
 
-      <PayNow />
-      <QRCode />
-      <CreditCard />
-      <BankTransfer />
-      <Cheque />
-      <Monthly />
+      <PayNow
+        classes={classes}
+        formikInitialValues={{
+          ...formikInitialValues,
+          type: "paynow"
+        }}
+        formikValidation={formikValidation}
+      />
+
+      <QRCode
+        classes={classes}
+        formikInitialValues={{
+          ...formikInitialValues,
+          type: "qrcode"
+        }}
+        formikValidation={formikValidation} />
+
+      <CreditCard classes={classes} />
+
+      <BankTransfer
+        classes={classes}
+        formikInitialValues={{
+          ...formikInitialValues,
+          type: "banktransfer"
+        }}
+        formikValidation={formikValidation} />
+
+      <Cheque
+        classes={classes}
+        formikInitialValues={{
+          ...formikInitialValues,
+          type: "cheque"
+        }}
+        formikValidation={formikValidation} />
+
+      <Monthly classes={classes} />
 
     </div>
   );
