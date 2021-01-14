@@ -63,7 +63,7 @@ function Cheque({ classes, formikInitialValues, formikValidation }) {
                 id="panel1a-header">
 
                 <Typography className={classes.heading}>Cheque</Typography>
-                <Typography className={classes.secondaryHeading}>I am an accordion</Typography>
+                <Typography className={classes.secondaryHeading}></Typography>
 
             </AccordionSummary>
             <Divider />

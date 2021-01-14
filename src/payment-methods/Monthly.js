@@ -16,7 +16,7 @@ function Monthly({ classes }) {
                 id="panel1a-header">
 
                 <Typography className={classes.heading}>Automatic Monthly Donation</Typography>
-                <Typography className={classes.secondaryHeading}>I am an accordion</Typography>
+                <Typography className={classes.secondaryHeading}></Typography>
 
             </AccordionSummary>
             <Divider />

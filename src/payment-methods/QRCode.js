@@ -62,7 +62,7 @@ function QRCode({ classes, formikInitialValues, formikValidation }) {
                 id="panel1a-header">
 
                 <Typography className={classes.heading}>PayLah/PayAnyone with QR Code</Typography>
-                <Typography className={classes.secondaryHeading}>I am an accordion</Typography>
+                <Typography className={classes.secondaryHeading}></Typography>
 
             </AccordionSummary>
             <Divider />
