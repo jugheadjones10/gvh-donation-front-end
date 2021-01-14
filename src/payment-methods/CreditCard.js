@@ -99,7 +99,7 @@ function CreditCard({ classes }) {
                 id="panel1a-header">
 
                 <Typography className={classes.heading}>Credit Card Payment</Typography>
-                <Typography className={classes.secondaryHeading}>I am an accordion</Typography>
+                <Typography className={classes.secondaryHeading}></Typography>
 
             </AccordionSummary>
             <Divider />
