@@ -107,7 +107,7 @@ function CreditCard({ classes }) {
 
                 <Typography className={classes.normalText}>
                     We are currently only accepting credit card donations for our <b>education bursary fund</b>.
-                    Please visit <a target="_blank" href="https://give.asia/campaign/fund-raising-for-education-bursaries-in-myanmar#/">this</a> link to proceed with payment.
+                    Please visit <a target="_blank" rel="noreferrer" href="https://give.asia/campaign/fund-raising-for-education-bursaries-in-myanmar#/">this</a> link to proceed with payment.
                 </Typography>
 
                 {/* <Elements stripe={promise}>
