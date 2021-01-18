@@ -10,6 +10,7 @@ import React from 'react';
 import * as Yup from 'yup';
 
 import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +32,15 @@ const useStyles = makeStyles((theme) => ({
   normalText: {
     fontSize: theme.typography.pxToRem(15),
   },
+  pdpaText: {
+    fontSize: theme.typography.pxToRem(10),
+    [theme.breakpoints.up("sm")]: {
+      width: "40%"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "80%"
+    },
+  },
   container: {
     width: "100%",
     display: 'flex',
@@ -38,15 +48,25 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center"
   },
   textContainer: {
-    width: "60%",
     display: 'flex',
     flexDirection: "column",
-    alignItems: "left"
+    alignItems: "left",
+    [theme.breakpoints.up("md")]: {
+      width: "40%"
+    },
+    [theme.breakpoints.down("md")]: {
+      width: "90%"
+    },
   },
   textField: {
     margin: "8px",
-    width: "40%"
-  }
+    [theme.breakpoints.up("sm")]: {
+      width: "40%"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "80%"
+    },
+  },
 }));
 
 const formikInitialValues = {

@@ -7,6 +7,7 @@ import Email from "../form-components/Email"
 import MobileNumber from "../form-components/MobileNumber"
 import Project from "../form-components/Project"
 import Amount from "../form-components/Amount"
+import PDPA from "../form-components/PDPA"
 
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -34,8 +35,6 @@ function BankTransfer({ classes, formikInitialValues, formikValidation }) {
                 .string()
         }),
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-
             fetch(
                 "https://gvh-donation-form.herokuapp.com/donation-form",
                 {
@@ -80,6 +79,8 @@ function BankTransfer({ classes, formikInitialValues, formikValidation }) {
 
                         <input type="hidden" id="chequenumber" {...formik.getFieldProps('chequenumber')} />
                         <input type="hidden" id="country" {...formik.getFieldProps('country')} />
+
+                        <PDPA classes={classes} />
                     </form>
                 }
 
