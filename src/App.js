@@ -10,7 +10,6 @@ import React from 'react';
 import * as Yup from 'yup';
 
 import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
   root: {
