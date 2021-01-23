@@ -8,6 +8,7 @@ import QRCode from "./payment-methods/QRCode"
 
 import React from 'react';
 import * as Yup from 'yup';
+import Typography from '@material-ui/core/Typography';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -106,6 +107,14 @@ function App() {
   return (
     <div className={classes.root}>
 
+      <Typography style={{ marginTop: "20px", marginBottom: "20px" }} className={classes.secondaryHeading}>
+        Thank you so much for your interest in funding our various projects! <br />
+          Please choose one of the transfer method and enter the required information. <br /><br />
+          This information will allow us to record the source of the funds accurately and use them for their intended purpose. <br />
+          Your information will not be published publicly without your permission and your identity will be kept confidential. <br /><br />
+          Feel free to email us at < a style={{ textDecoration: "none", color: "black" }} href="mailto:Globalvillageforhope@gmail.com"><b>Globalvillageforhope@gmail.com</b></a>  or Whatsapp us at <b style={{ color: "black" }}>+65 88224918</b> if you would like to seek clarifications. <br />
+      </Typography>
+
       <PayNow
         classes={classes}
         formikInitialValues={{
@@ -141,7 +150,13 @@ function App() {
         }}
         formikValidation={formikValidation} />
 
-      <Monthly classes={classes} />
+      <Monthly
+        classes={classes}
+        formikInitialValues={{
+          ...formikInitialValues,
+          type: "monthly"
+        }}
+        formikValidation={formikValidation} />
 
     </div>
   );

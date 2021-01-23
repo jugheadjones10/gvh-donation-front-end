@@ -21,6 +21,7 @@ function Project({ className, formik }) {
                 <MenuItem value="">
                     <em>None</em>
                 </MenuItem>
+                <MenuItem value={"COVID Rice Relief"}>COVID Rice Relief</MenuItem>
                 <MenuItem value={"Education"}>Education</MenuItem>
                 <MenuItem value={"Rice for Hope"}>Rice for Hope</MenuItem>
                 <MenuItem value={"Water Well"}>Water Well</MenuItem>
