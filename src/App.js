@@ -101,10 +101,10 @@ const formikValidation = {
 }
 
 //The url below is the server deployed on heroku. 
-//https://gvh-donation-form.herokuapp.com/donation-form
+//http://gvhdonationform-env.eba-57zpfv6k.ap-northeast-2.elasticbeanstalk.com/donation-form
 function fetchFromFormServer(values) {
   return fetch(
-    "http://gvhdonationform-env.eba-57zpfv6k.ap-northeast-2.elasticbeanstalk.com/donation-form",
+    "https://gvh-donation-form.herokuapp.com/donation-form",
     {
       method: 'POST',
       headers: {
