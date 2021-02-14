@@ -100,6 +100,22 @@ const formikValidation = {
     .string(),
 }
 
+//The url below is the server deployed on heroku. 
+//https://gvh-donation-form.herokuapp.com/donation-form
+function fetchFromFormServer(values) {
+  return fetch(
+    "http://gvhdonationform-env.eba-57zpfv6k.ap-northeast-2.elasticbeanstalk.com/donation-form",
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'text/html'
+      },
+      body: JSON.stringify(values, null, 2)
+    }
+  )
+}
+
 
 function App() {
   const classes = useStyles();
@@ -122,6 +138,7 @@ function App() {
           type: "paynow"
         }}
         formikValidation={formikValidation}
+        fetchFromFormServer={fetchFromFormServer}
       />
 
       <QRCode
@@ -130,7 +147,9 @@ function App() {
           ...formikInitialValues,
           type: "qrcode"
         }}
-        formikValidation={formikValidation} />
+        formikValidation={formikValidation}
+        fetchFromFormServer={fetchFromFormServer}
+      />
 
       <CreditCard classes={classes} />
 
@@ -140,7 +159,9 @@ function App() {
           ...formikInitialValues,
           type: "banktransfer"
         }}
-        formikValidation={formikValidation} />
+        formikValidation={formikValidation}
+        fetchFromFormServer={fetchFromFormServer}
+      />
 
       <Cheque
         classes={classes}
@@ -148,7 +169,9 @@ function App() {
           ...formikInitialValues,
           type: "cheque"
         }}
-        formikValidation={formikValidation} />
+        formikValidation={formikValidation}
+        fetchFromFormServer={fetchFromFormServer}
+      />
 
       <Monthly
         classes={classes}
@@ -156,10 +179,13 @@ function App() {
           ...formikInitialValues,
           type: "monthly"
         }}
-        formikValidation={formikValidation} />
+        formikValidation={formikValidation}
+        fetchFromFormServer={fetchFromFormServer}
+      />
 
     </div>
   );
 }
 
 export default App;
+

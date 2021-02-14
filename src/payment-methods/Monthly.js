@@ -18,7 +18,7 @@ import Divider from '@material-ui/core/Divider';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import Button from '@material-ui/core/Button';
 
-function Monthly({ classes, formikInitialValues, formikValidation }) {
+function Monthly({ classes, formikInitialValues, formikValidation, fetchFromFormServer }) {
 
     const [refid, setRefid] = useState(null);
 
@@ -35,16 +35,8 @@ function Monthly({ classes, formikInitialValues, formikValidation }) {
                 .string()
         }),
         onSubmit: values => {
-            fetch(
-                "https://gvh-donation-form.herokuapp.com/donation-form",
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'text/html'
-                    },
-                    body: JSON.stringify(values, null, 2)
-                }
+            fetchFromFormServer(
+                values
             ).then(res => res.text()
             ).then(res => {
                 setRefid(res)

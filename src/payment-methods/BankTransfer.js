@@ -19,7 +19,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
 
-function BankTransfer({ classes, formikInitialValues, formikValidation }) {
+function BankTransfer({ classes, formikInitialValues, formikValidation, fetchFromFormServer }) {
     const [refid, setRefid] = useState(null);
 
     const formik = useFormik({
@@ -35,16 +35,8 @@ function BankTransfer({ classes, formikInitialValues, formikValidation }) {
                 .string()
         }),
         onSubmit: values => {
-            fetch(
-                "https://gvh-donation-form.herokuapp.com/donation-form",
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'text/html'
-                    },
-                    body: JSON.stringify(values, null, 2)
-                }
+            fetchFromFormServer(
+                values
             ).then(res => res.text()
             ).then(res => {
                 setRefid(res)

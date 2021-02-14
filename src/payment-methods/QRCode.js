@@ -20,8 +20,7 @@ import Divider from '@material-ui/core/Divider';
 
 import QRCodeImage from "./QRCode.jpg"
 
-
-function QRCode({ classes, formikInitialValues, formikValidation }) {
+function QRCode({ classes, formikInitialValues, formikValidation, fetchFromFormServer }) {
     const [refid, setRefid] = useState(null);
 
     const formik = useFormik({
@@ -37,20 +36,11 @@ function QRCode({ classes, formikInitialValues, formikValidation }) {
                 .string(),
         }),
         onSubmit: values => {
-            fetch(
-                "https://gvh-donation-form.herokuapp.com/donation-form",
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'text/html'
-                    },
-                    body: JSON.stringify(values, null, 2)
-                }
-            ).then(res => res.text()
-            ).then(res => {
-                setRefid(res)
-            })
+            fetchFromFormServer(values)
+                .then(res => res.text()
+                ).then(res => {
+                    setRefid(res)
+                })
         },
     });
 
