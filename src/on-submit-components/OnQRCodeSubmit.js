@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import React from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -14,10 +17,10 @@ function OnQRCodeSubmit({ refid }) {
       </Typography>
 
       <Container>
-        <img src={QRCodeImage} style={{ width: "60%" }} alt=""></img>
+        <img src={QRCodeImage} css={{ width: "200px" }} alt=""></img>
       </Container>
 
-     <Typography variant="body1">
+    <Typography variant="body1">
         Please enter your Reference ID when sending through PayNow so that we
         can identify you.
       </Typography>
