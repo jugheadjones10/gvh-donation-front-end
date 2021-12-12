@@ -1,191 +1,265 @@
-import './App.css';
-import PayNow from "./payment-methods/PayNow"
-import CreditCard from "./payment-methods/CreditCard"
-import BankTransfer from "./payment-methods/BankTransfer"
-import Cheque from "./payment-methods/Cheque"
-import Monthly from "./payment-methods/Monthly"
-import QRCode from "./payment-methods/QRCode"
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import React, { useState } from "react";
 
-import React from 'react';
-import * as Yup from 'yup';
-import Typography from '@material-ui/core/Typography';
+//Components displayed on submission complete.
+// import OnPayNowSubmit from "./payment-methods/OnPayNowSubmit";
+// import OnQRCodeSubmit from "./payment-methods/OnQRCodeSubmit";
 
-import { makeStyles } from '@material-ui/core/styles';
+//"Higher level" components that encapsulate functionality that is re-used for each payment type.
+import PaymentMethod from "./payment-methods/PaymentMethod.js";
+import { FormTextField } from "./form-components/FormComponents.js";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '60%',
-    margin: "auto"
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: '70%',
-    flexShrink: 0,
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
-  largeText: {
-    fontSize: theme.typography.pxToRem(30),
-  },
-  normalText: {
-    fontSize: theme.typography.pxToRem(15),
-  },
-  pdpaText: {
-    fontSize: theme.typography.pxToRem(10),
-    [theme.breakpoints.up("sm")]: {
-      width: "40%"
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "80%"
-    },
-  },
-  container: {
-    width: "100%",
-    display: 'flex',
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  textContainer: {
-    display: 'flex',
-    flexDirection: "column",
-    alignItems: "left",
-    [theme.breakpoints.up("md")]: {
-      width: "40%"
-    },
-    [theme.breakpoints.down("md")]: {
-      width: "90%"
-    },
-  },
-  textField: {
-    margin: "8px",
-    [theme.breakpoints.up("sm")]: {
-      width: "40%"
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "80%"
-    },
-  },
-}));
+//MUI components
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 
-const formikInitialValues = {
-  fullname: '',
-  email: '',
-  mobilenumber: '',
-  project: '',
-  amount: '',
-  chequenumber: '',
-  country: ''
-}
+//Stripe dependencies
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 
-const formikValidation = {
-  fullname: Yup
-    .string()
-    .required('Required'),
-  email: Yup
-    .string()
-    .email('Invalid email address')
-    .required('Required'),
-  mobilenumber: Yup
-    .number()
-    .typeError("Invalid mobile number")
-    .positive("Invalid mobile number")
-    .integer("Invalid mobile number")
-    .required('Required'),
-  project: Yup
-    .string()
-    .required('Required'),
-  type: Yup
-    .string(),
-}
+import * as Yup from "yup";
+import Preamble from "./Preamble";
 
-//The url below is the server deployed on heroku. 
-//http://gvhdonationform-env.eba-57zpfv6k.ap-northeast-2.elasticbeanstalk.com/donation-form
-function fetchFromFormServer(values) {
-  return fetch(
-    "https://gvh-donation-form.herokuapp.com/donation-form",
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'text/html'
+const CARD_ELEMENT_OPTIONS = {
+  style: {
+    base: {
+      color: "#32325d",
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: "antialiased",
+      fontSize: "16px",
+      "::placeholder": {
+        color: "#aab7c4",
       },
-      body: JSON.stringify(values, null, 2)
-    }
-  )
+    },
+    invalid: {
+      color: "#fa755a",
+      iconColor: "#fa755a",
+    },
+  },
+};
+
+function getClientSecret(amount) {
+  return fetch("http://165.22.241.81:8000/secret", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ amount: amount }),
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (responseJson) {
+      return responseJson.client_secret;
+    })
+    .catch((err) => alert("First steP" + err));
 }
 
+function formSubmit(values){
+
+  const api =
+    process.env.NODE_ENV === "development"
+    ? process.env.REACT_APP_DEV_FORM_SUBMISSION
+    : process.env.REACT_APP_PROD_FORM_SUBMISSION
+
+  return fetch(api, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "text/html",
+    },
+    body: JSON.stringify(values, null, 2),
+  })
+    .then((res) => res.text()) 
+    .then((res) => {
+      return { refid: res }; 
+    }); 
+
+}
 
 function App() {
-  const classes = useStyles();
+  const stripe = useStripe();
+  const elements = useElements();
 
   return (
-    <div className={classes.root}>
+    <div
+      // css={{
+      //   width: "60%",
+      //   margin: "auto",
+      // }}
+    >
+      <Preamble />
 
-      <Typography style={{ marginTop: "20px", marginBottom: "20px" }} className={classes.secondaryHeading}>
-        Thank you so much for your interest in funding our various projects! <br />
-          Please choose one of the transfer method and enter the required information. <br /><br />
-          This information will allow us to record the source of the funds accurately and use them for their intended purpose. <br />
-          Your information will not be published publicly without your permission and your identity will be kept confidential. <br /><br />
-          Feel free to email us at < a style={{ textDecoration: "none", color: "black" }} href="mailto:Globalvillageforhope@gmail.com"><b>Globalvillageforhope@gmail.com</b></a>  or Whatsapp us at <b style={{ color: "black" }}>+65 88224918</b> if you would like to seek clarifications. <br />
-      </Typography>
+      <PaymentMethod method="paynow" post={formSubmit}/>
+      <PaymentMethod method="qrcode" post={formSubmit}/>
+      <PaymentMethod method="banktransfer" post={formSubmit}/>
+      <PaymentMethod method="cheque" post={formSubmit}/>
+      <PaymentMethod method="monthly" post={formSubmit}/>
 
-      <PayNow
-        classes={classes}
-        formikInitialValues={{
-          ...formikInitialValues,
-          type: "paynow"
-        }}
-        formikValidation={formikValidation}
-        fetchFromFormServer={fetchFromFormServer}
-      />
+      {/* <PaymentMethod */}
+      {/*   title="PayNow with UEN" */}
+      {/*   formId="paynow" */}
+      {/*   customValidation={{ */}
+      {/*     amount: Yup.number() */}
+      {/*     .typeError("Invalid donation amount") */}
+      {/*     .positive("Invalid mobile number") */}
+      {/*     .required("Required"), */}
+      {/*   }} */}
+      {/*   renderFormFields={(formik) => ( */}
+      {/*     <FormTextField */}
+      {/*       id={"amount"} */}
+      {/*       label={"Donation Amount"} */}
+      {/*       formik={formik} */}
+      {/*     /> */}
+      {/*   )} */}
+      {/*   onSubmit={(values) => { */}
+      {/*     return fetchFromFormServer(values) */}
+      {/*       .then((res) => res.text()) */}
+      {/*       .then((res) => { */}
+      {/*         return { refid: res }; */}
+      {/*       }); */}
+      {/*   }} */}
+      {/*   renderOnSubmit={(renderData) => { */}
+      {/*     return <OnPayNowSubmit refid={renderData.refid} />; */}
+      {/*   }} */}
+      {/*   isLoading={setLoading} */}
+      {/* /> */}
+      {/* <PaymentMethod */}
+      {/*   title="PayLah/PayAnyone with QR Code" */}
+      {/*   formId="qrcode" */}
+      {/*   customValidation={{ */}
+      {/*     amount: Yup.number() */}
+      {/*     .typeError("Invalid donation amount") */}
+      {/*     .positive("Invalid mobile number") */}
+      {/*     .required("Required"), */}
+      {/*   }} */}
+      {/*   renderFormFields={(formik) => ( */}
+      {/*     <FormTextField */}
+      {/*       id={"amount"} */}
+      {/*       label={"Donation Amount"} */}
+      {/*       formik={formik} */}
+      {/*     /> */}
+      {/*   )} */}
+      {/*   onSubmit={(values) => { */}
+      {/*     return fetchFromFormServer(values) */}
+      {/*       .then((res) => res.text()) */}
+      {/*       .then((res) => { */}
+      {/*         return { refid: res }; */}
+      {/*       }); */}
+      {/*   }} */}
+      {/*   renderOnSubmit={(renderData) => { */}
+      {/*     return <OnQRCodeSubmit refid={renderData.refid} />; */}
+      {/*   }} */}
+      {/*   isLoading={setLoading} */}
+      {/* /> */}
+      {/* <PaymentMethod */}
+      {/*   title="Credit Card Payment" */}
+      {/*   formId="creditcard" */}
+      {/*   customValidation={{ */}
+      {/*     amount: Yup.number() */}
+      {/*     .typeError("Invalid donation amount") */}
+      {/*     .positive("Invalid mobile number") */}
+      {/*     .required("Required"), */}
+      {/*   }} */}
+      {/*   renderFormFields={(formik) => ( */}
+      {/*     <> */}
+      {/*       <FormTextField */}
+      {/*         id={"amount"} */}
+      {/*         label={"Donation Amount"} */}
+      {/*         formik={formik} */}
+      {/*       /> */}
+      {/*       <CardElement /> */}
+      {/*     </> */}
+      {/*   )} */}
+      {/*   onSubmit={async (values) => { */}
+      {/*     if (!stripe || !elements) { */}
+      {/*       return Promise.reject("Error. Please try again."); */}
+      {/*     } */}
 
-      <QRCode
-        classes={classes}
-        formikInitialValues={{
-          ...formikInitialValues,
-          type: "qrcode"
-        }}
-        formikValidation={formikValidation}
-        fetchFromFormServer={fetchFromFormServer}
-      />
+      {/*     const clientSecret = await getClientSecret(values.amount); */}
+      {/*     const result = await stripe.confirmCardPayment(clientSecret, { */}
+      {/*       payment_method: { */}
+      {/*         card: elements.getElement(CardElement), */}
+      {/*         billing_details: { */}
+      {/*           name: "Jenny Rosen", */}
+      {/*         }, */}
+      {/*       }, */}
+      {/*     }); */}
+      {/*     if (result.error) { */}
+      {/*       // Show error to your customer (e.g., insufficient funds) */}
+      {/*       alert("Strip processing error: " + result.error.message); */}
+      {/*     } else { */}
+      {/*       // The payment has been processed! */}
+      {/*       if (result.paymentIntent.status === "succeeded") { */}
+      {/*         // Show a success message to your customer */}
+      {/*         // There's a risk of the customer closing the window before callback */}
+      {/*         // execution. Set up a webhook or plugin to listen for the */}
+      {/*         // payment_intent.succeeded event that handles any business critical */}
+      {/*         // post-payment actions. */}
+      {/*         return Promise.resolve({ succeeded: true }); */}
+      {/*       } */}
+      {/*     } */}
+      {/*   }} */}
+      {/*   renderOnSubmit={(renderData) => { */}
+      {/*     return <div>renderData.succeeded</div>; */}
+      {/*   }} */}
+      {/*   isLoading={setLoading} */}
+      {/* /> */}
 
-      <CreditCard classes={classes} />
 
-      <BankTransfer
-        classes={classes}
-        formikInitialValues={{
-          ...formikInitialValues,
-          type: "banktransfer"
-        }}
-        formikValidation={formikValidation}
-        fetchFromFormServer={fetchFromFormServer}
-      />
+      {/* <PayNow */}
+      {/*   classes={classes} */}
+      {/*   formikInitialValues={{ */}
+      {/*     ...formikInitialValues, */}
+      {/*     type: "paynow" */}
+      {/*   }} */}
+      {/*   formikValidation={formikValidation} */}
+      {/*   fetchFromFormServer={fetchFromFormServer} */}
+      {/* /> */}
 
-      <Cheque
-        classes={classes}
-        formikInitialValues={{
-          ...formikInitialValues,
-          type: "cheque"
-        }}
-        formikValidation={formikValidation}
-        fetchFromFormServer={fetchFromFormServer}
-      />
+      {/* <QRCode */}
+      {/*   classes={classes} */}
+      {/*   formikInitialValues={{ */}
+      {/*     ...formikInitialValues, */}
+      {/*     type: "qrcode" */}
+      {/*   }} */}
+      {/*   formikValidation={formikValidation} */}
+      {/*   fetchFromFormServer={fetchFromFormServer} */}
+      {/* /> */}
 
-      <Monthly
-        classes={classes}
-        formikInitialValues={{
-          ...formikInitialValues,
-          type: "monthly"
-        }}
-        formikValidation={formikValidation}
-        fetchFromFormServer={fetchFromFormServer}
-      />
+      {/* <CreditCard classes={classes} /> */}
+
+      {/* <BankTransfer */}
+      {/*   classes={classes} */}
+      {/*   formikInitialValues={{ */}
+      {/*     ...formikInitialValues, */}
+      {/*     type: "banktransfer" */}
+      {/*   }} */}
+      {/*   formikValidation={formikValidation} */}
+      {/*   fetchFromFormServer={fetchFromFormServer} */}
+      {/* /> */}
+
+      {/* <Cheque */}
+      {/*   classes={classes} */}
+      {/*   formikInitialValues={{ */}
+      {/*     ...formikInitialValues, */}
+      {/*     type: "cheque" */}
+      {/*   }} */}
+      {/*   formikValidation={formikValidation} */}
+      {/*   fetchFromFormServer={fetchFromFormServer} */}
+      {/* /> */}
+
+      {/* <Monthly */}
+      {/*   classes={classes} */}
+      {/*   formikInitialValues={{ */}
+      {/*     ...formikInitialValues, */}
+      {/*     type: "monthly" */}
+      {/*   }} */}
+      {/*   formikValidation={formikValidation} */}
+      {/*   fetchFromFormServer={fetchFromFormServer} */}
+      {/* /> */}
 
     </div>
   );
 }
-
 export default App;
-

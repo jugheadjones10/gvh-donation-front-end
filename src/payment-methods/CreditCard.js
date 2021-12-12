@@ -9,16 +9,16 @@ import React from 'react';
 // import Project from "../form-components/Project"
 // import Amount from "../form-components/Amount"
 
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Divider from '@material-ui/core/Divider';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Divider from '@mui/material/Divider';
 
-// import AccordionActions from '@material-ui/core/AccordionActions';
-// import Button from '@material-ui/core/Button';
-// import HelpIcon from '@material-ui/icons/Help';
+// import AccordionActions from '@mui/material/AccordionActions';
+// import Button from '@mui/material/Button';
+// import HelpIcon from '@mui/icons-material/Help';
 
 // import { loadStripe } from "@stripe/stripe-js";
 // import { Elements } from "@stripe/react-stripe-js";
