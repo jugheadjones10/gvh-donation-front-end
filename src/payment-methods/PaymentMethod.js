@@ -132,7 +132,7 @@ function PaymentMethod({ method, post}) {
         )}
 
         {submitted === true && config.response(renderData)}
-        {config.response("F")}
+        {/* {config.response("F")} */}
       </AccordionDetails>
 
       {submitted === false && (
