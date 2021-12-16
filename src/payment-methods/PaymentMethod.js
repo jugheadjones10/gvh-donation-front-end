@@ -51,7 +51,7 @@ const configs = {
   qrcode: {
     title:"PayLah/PayAnyone with QR Code",
     fields: ["fullname", "email", "mobilenumber", "project", "amount"],
-    response: (renderData) => <OnQRCodeSubmit refid={renderData.refid} />
+    response: (renderData) => <OnQRCodeSubmit qrUrl={renderData.qrUrl} refid={renderData.refid} />
   }, 
   banktransfer: {
     title:"Bank Transfer",
@@ -76,7 +76,7 @@ const configs = {
   qrcodepaintings: {
     title:"PayLah/PayAnyone with QR Code",
     fields: ["fullname", "email", "mobilenumber", "amount"],
-    response: (renderData) => <OnQRCodeSubmit refid={renderData.refid} />
+    response: (renderData) => <OnQRCodeSubmit qrUrl={renderData.qrUrl} refid={renderData.refid} />
   } 
 }
 
@@ -132,7 +132,6 @@ function PaymentMethod({ method, post}) {
         )}
 
         {submitted === true && config.response(renderData)}
-        {/* {config.response("F")} */}
       </AccordionDetails>
 
       {submitted === false && (

@@ -60,14 +60,14 @@ function auctionSubmit( values, painterData){
   return fetch(api, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      Accept: "text/html",
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(values, null, 2),
   })
-    .then((res) => res.text()) 
-    .then((res) => {
-      return { refid: res }; 
+    .then((res) => res.json()) 
+    .then((json) => {
+      console.log("JSON", json)
+      return { refid: json.ID, qrUrl: json.qrUrl }; 
     }); 
 }
 
@@ -89,10 +89,38 @@ function Auction() {
     <Box sx={{ flexGrow: 1 }}>
 
       <Typography css={{padding: "50px"}} variant="body1">
-        These art pieces are drawn by the children from the various homes in celebration of the festive season of Christmas.
-        <br/>
-        <br/>
-        Click on the art pieces that you would like to donate to. If you are the highest donor of a particular art piece, we will send the original physical version to you to thank you for your generous donation.
+        GVH Santa Mission 2021 Art Gallery! 
+      <br/>
+      <br/>
+ 
+Thank you so much for offering your support to this year's Santa Mission!  
+ 
+      <br/>
+      <br/>
+Like previous years, we aim to raise S$4000 which will be used to purchase brand new T-shirts for all the 250 children we are supporting in Myanmar as well as to give them a memorable Christmas meal in this once-a-year joyous occasion. 
+ 
+      <br/>
+      <br/>
+        Do follow us on <a href="www.facebook.com/Globalvillageforhope">www.facebook.com/Globalvillageforhope</a> for latest updates of our Santa Mission Project. 
+ 
+      <br/>
+      <br/>
+These art pieces are hand drawn by the children from the various children homes in Myanmar which they would like to gift to donors and volunteers like yourself as a way to show their gesture of gratitude. 
+ 
+      <br/>
+      <br/>
+Out of more than 200 pictures drawn, these are the highest rated ones by our GVH volunteers and we managed to find a way to transport these physical copies to Singapore and they are with us in Singapore now!! 
+ 
+      <br/>
+      <br/>
+Please click on the art pieces that you would like to donate to. If you are the highest donor of a particular art piece, we will mail the original physical version to you on behalf of the children. 
+ 
+      <br/>
+      <br/>
+You may donate to more than 1 piece of art!  
+ 
+      <br/>
+Thank you so much to being the 'Secret Santa' of these children!
       </Typography>
 
       <Grid container alignItems="center" >
