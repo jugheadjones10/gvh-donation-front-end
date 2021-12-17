@@ -17,7 +17,7 @@ export const formComponentsStyles = function (theme) {
     marginBottom: "5px",
     [theme.breakpoints.up("sm")]: {
       width: "40%",
-    },
+   },
     [theme.breakpoints.down("sm")]: {
      width: "80%",
     },
@@ -26,9 +26,10 @@ export const formComponentsStyles = function (theme) {
 
 export function FormTextField({ id, label, formik }) {
   const theme = useTheme();
+      {/* css={formComponentsStyles(theme)} */}
   return (
     <TextField
-      css={formComponentsStyles(theme)}
+      fullWidth
       id={id}
       {...formik.getFieldProps(id)}
       label={label}

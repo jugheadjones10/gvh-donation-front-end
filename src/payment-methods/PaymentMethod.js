@@ -9,7 +9,7 @@ import {
   FormTextField,
   FormSelection,
 } from "../form-components/FormComponents";
-import { Container } from "./StyledComponents";
+import {ResponseContainer} from "./StyledComponents";
 import { formComponentsStyles } from "../form-components/FormComponents";
 
 //Components displayed on submission complete.
@@ -35,6 +35,7 @@ import Backdrop from "@mui/material/Backdrop";
 import HelpIcon from '@mui/icons-material/Help';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import { Container } from '@mui/material';
 
 // import HelpIcon from '@mui/icons-material/Help';
 
@@ -120,7 +121,7 @@ function PaymentMethod({ method, post}) {
       <Divider />
       <AccordionDetails>
         {submitted === false && (
-          <Container as="form" onSubmit={formik.handleSubmit} id={method}>
+          <ResponseContainer maxWidth="xs"  as="form" onSubmit={formik.handleSubmit} id={method}>
 
             {config.fields.map(field => {
               return formComponents(field, formik)
@@ -128,15 +129,16 @@ function PaymentMethod({ method, post}) {
 
             <input type="hidden" id="type" {...formik.getFieldProps('type')} />
 
-          </Container>
+          </ResponseContainer>
         )}
 
         {submitted === true && config.response(renderData)}
+        {/* {config.response({refid: "111", qrUrl: "www.google.com"})} */}
       </AccordionDetails>
 
       {submitted === false && (
         <AccordionActions>
-          <Container>
+          <ResponseContainer maxWidth="xs">
             <Tooltip title="Information from the form will allow us to record the source of the funds accurately and use them for their intended purpose. Your information will not be published publicly without your permission and your identity will be kept confidential." arrow placement="top">
               <Typography variant="body2">
                 <IconButton>
@@ -146,7 +148,8 @@ function PaymentMethod({ method, post}) {
               </Typography>
             </Tooltip>
             <Button
-              css={{...formComponentsStyles(theme), marginTop: "0px", marginBottom: "40px" }}
+              css={{marginBottom: theme.spacing(3)}}
+              fullWidth
               variant="contained"
               size="medium"
               color="primary"
@@ -157,7 +160,7 @@ function PaymentMethod({ method, post}) {
               Submit
             </Button>
             <PDPA />
-          </Container>
+          </ResponseContainer>
         </AccordionActions>
       )}
       <Backdrop

@@ -1,11 +1,11 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import {Container} from "../payment-methods/StyledComponents";
+import {ResponseContainer} from "../payment-methods/StyledComponents";
 
 function OnMonthlySubmit({ refid }) {
   return (
-    <Container>
+    <ResponseContainer>
       <Typography >
         To make an automatic monthly donation, please follow these instructions.
         <br /><br />
@@ -41,7 +41,7 @@ function OnMonthlySubmit({ refid }) {
         <b>Bank Code:</b> 7375<br />
         <b>Branch Code:</b> 012 (Bukit Panjang Branch)
       </Typography>
-    </Container>
+    </ResponseContainer>
       
       );
 }
