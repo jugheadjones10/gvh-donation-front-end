@@ -26,7 +26,7 @@ function Preamble() {
       {/*   and a second email to confirm donation when we successfully receive your donation. */}
       {/* </Typography> */}
       <Typography
-        variant="body2"
+        variant="body1"
         css={{ color: theme.palette.text.secondary }}
         gutterBottom
       >

@@ -202,7 +202,7 @@ function Auction() {
       }
 
       <Box p={8}>
-        <Typography variant="h4"  >
+        <Typography variant="h4" align="center" >
           {/* color="#e4d9d9" */}
           GVH Santa Mission 2021 Art Gallery
         </Typography>

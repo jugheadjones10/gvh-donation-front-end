@@ -53,7 +53,7 @@ function getClientSecret(amount) {
     })
     .then(function (responseJson) {
       return responseJson.client_secret;
-   })
+    })
     .catch((err) => alert("First steP" + err));
 }
 
@@ -87,10 +87,10 @@ function App() {
 
   return (
     //<div
-      // css={{
-      //   width: "60%",
-      //   margin: "auto",
-      // }}
+    // css={{
+    //   width: "60%",
+    //   margin: "auto",
+    // }}
     //>
       <Container maxWidth="md" css={{padding: theme.spacing(3)}}>
         <Preamble />
@@ -265,6 +265,6 @@ function App() {
         {/* /> */}
 
       </Container>
-      );
-      }
-      export default App;
+  );
+}
+export default App;
