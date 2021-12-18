@@ -35,8 +35,9 @@ function OnPayNowSubmit({ refid }) {
         alt=""
         height="auto"
         width="60%"
-        src="https://0l45m.mjt.lu/tplimg/0l45m/b/1mhzt/0mo.jpeg"
-      />
+        src={process.env.NODE_ENV === "development" ?
+      process.env.REACT_APP_DEV_SERVER + "/uenscreenshot.png" : 
+      process.env.REACT_APP_PROD_SERVER + "/uenscreenshot.png"} />
 
       <Typography variant="body1">
         {pleaseCheckEmail}

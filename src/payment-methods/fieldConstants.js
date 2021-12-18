@@ -39,13 +39,13 @@ export const formikValidation = {
 };
 
 export function formComponents(field, formik){
-  function formTextField(id, label){
-    return <FormTextField id={id} label={label} formik={formik} />
+  function formTextField(id, label, type){
+    return <FormTextField id={id} label={label} type={type} formik={formik} />
   }
   const obj = {
-    fullname: formTextField("fullname", "Full name (as in NRIC)"),
-    email: formTextField("email", "Email"),
-    mobilenumber: formTextField("mobilenumber", "Mobile Number"),
+    fullname: formTextField("fullname", "Full name (as in NRIC)", "text",),
+    email: formTextField("email", "Email", "email"),
+    mobilenumber: formTextField("mobilenumber", "Mobile Number", "tel"),
     project: <FormSelection id="project" label="Project" formik={formik}
       optionValues={[
         "COVID Rice Relief",
@@ -57,8 +57,8 @@ export function formComponents(field, formik){
         "Administration and Exploration",
         "Any project that requires the most help",
       ]}/>,
-    amount: formTextField("amount", "Donation Amount"),
-    chequenumber: formTextField("chequenumber", "Cheque Number"),
+    amount: formTextField("amount", "Donation Amount", "number"),
+    chequenumber: formTextField("chequenumber", "Cheque Number", "text"),
     country: ""
   }
 

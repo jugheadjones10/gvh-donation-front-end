@@ -25,8 +25,8 @@ function OnQRCodeSubmit({ refid, qrUrl }) {
           Using any of the following banking apps, scan the QR code below, then key in your donation amount. In case you are using your phone, take a screenshot of the QR code and upload it within your banking app.
         </Typography>
 
-        <img src={paynowapps} width="60%" css={{margin: theme.spacing(3)}} alt=""></img>
-        <img src={qrUrl} width="60%" css={{margin: theme.spacing(3)}} alt=""></img>
+        <img src={paynowapps} width="60%" css={{marginTop: theme.spacing(3)}} alt=""></img>
+        <img src={qrUrl} width="60%" css={{marginBottom: theme.spacing(3)}} alt=""></img>
 
         <Typography variant="body1">
           {pleaseCheckEmail}

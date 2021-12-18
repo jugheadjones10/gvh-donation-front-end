@@ -42,7 +42,7 @@ const Item = styled(Box)(({ theme }) => ({
 }));
 
 const paintingsData = [
-  {image: image1,  painter: "Jack", age: 12, from: "my home"},
+  // {image: image1,  painter: "Jack", age: 12, from: "my home"},
   {image: image2, painter: "Van Lal Luai", age: 15, from: "Ebenezer"},
   {image: image3, painter: "Man Lian Nuam", age: 17, from: "Ebenezer"},
   {image: image4, painter: "Thang Awm", age: 18, from: "Ebenezer"},

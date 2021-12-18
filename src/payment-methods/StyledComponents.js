@@ -17,16 +17,8 @@ export function ResponseContainer(props) {
   return <CenteredContainer {...props} />;
 }
 
-// export const Container = styled.div({
-//   width: "100%",
-//   display: "flex",
-//   flexDirection: "column",
-//   alignItems: "center",
-// });
 
-// export const CenteredContainer = styled.div({
-//   width: "100%",
-//   display: "flex",
-//   flexDirection: "column",
-//   alignItems: "center",
-// });
+export const LeftColText= styled.td({
+    textAlign: "right",
+    fontWeight: "bold"
+})

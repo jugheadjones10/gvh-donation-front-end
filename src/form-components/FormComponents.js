@@ -24,12 +24,12 @@ export const formComponentsStyles = function (theme) {
   };
 };
 
-export function FormTextField({ id, label, formik }) {
+export function FormTextField({ id, label, type, formik }) {
   const theme = useTheme();
-      {/* css={formComponentsStyles(theme)} */}
   return (
     <TextField
       fullWidth
+      type={type}
       id={id}
       {...formik.getFieldProps(id)}
       label={label}
@@ -47,7 +47,7 @@ export function FormSelection({ id, label, formik, optionValues }) {
   const theme = useTheme();
   return (
     <FormControl
-      css={formComponentsStyles(theme)}
+      fullWidth
       variant="filled"
       margin="none"
       error={formik.touched.project && formik.errors.project ? true : false}

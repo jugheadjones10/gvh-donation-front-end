@@ -6,10 +6,10 @@ import {ResponseContainer} from "../payment-methods/StyledComponents";
 
 function OnChequeSubmit({ refid }) {
   return (
-    <ResponseContainer>
-                        <Typography >
-                            Kindly drop the cheque off at any UOB Branch and include this account number <b>(324-310-964-5)</b> on the back of the cheque.
-                        </Typography>
+    <ResponseContainer maxWidth="xs">
+      <Typography >
+        Kindly drop the cheque off at any UOB Branch and include the GVH account number <b>(324-310-964-5)</b> on the back of the cheque.
+      </Typography>
     </ResponseContainer>
   );
 }

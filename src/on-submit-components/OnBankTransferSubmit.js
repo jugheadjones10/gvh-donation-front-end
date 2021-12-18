@@ -1,34 +1,121 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import styled from "@emotion/styled";
+
 import React from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
 import {ResponseContainer} from "../payment-methods/StyledComponents";
+import {LeftColText} from "../payment-methods/StyledComponents";
+
+import {strings} from  "./stringConstants"
+const {pleaseCheckEmail} = strings
 
 function OnBankTransferSubmit({ refid }) {
   return (
-    <ResponseContainer>
-      <Typography variant="h6">Here is your Reference ID :</Typography>
-      <Typography variant="h3">{refid}</Typography>
-      <Typography variant="body1" style={{ marginBottom: "20px" }}>
-        Please enter your Reference ID when making the transfer.
-      </Typography>
+      <ResponseContainer maxWidth="xs">
 
-      <ResponseContainer>
-        <Typography ><b>Bank Name:</b> United Overseas Bank Limited</Typography>
-        <Typography ><b>Account Name:</b> Global Village for Hope</Typography>
-        <Typography ><b>Account Number:</b> 324-310-964-5</Typography>
-       <Typography ><b>Bank Code:</b> 7375</Typography>
-       <Typography >
-          <b>Branch Code:</b> 012 (Bukit Panjang Branch)
+          <Typography variant="h6">Here is your Reference ID :</Typography>
+          <Typography variant="h3" mb={3}>
+              {refid}
+          </Typography>
+
+          <Typography variant="body1" mb={3}>
+              Please input the above reference ID under the comments or reference number field of your bank transfer.
+          </Typography>
+
+          <table>
+              <tr>
+                  <LeftColText>
+                      Bank Name:
+                  </LeftColText>
+                  <td>
+                      United Overseas Bank Limited
+                  </td>
+              </tr>
+              <tr>
+                  <LeftColText>
+                      Account Name:
+                  </LeftColText>
+                  <td>
+                      Global Village for Hope
+                  </td>
+              </tr>
+              <tr>
+                  <LeftColText >
+                      Account Number:
+                  </LeftColText>
+                  <td>
+                      324-310-964-5
+                  </td>
+              </tr>
+              <tr>
+                  <LeftColText >
+                      Bank Code:
+                  </LeftColText>
+                  <td>
+                      7375
+                  </td>
+              </tr>
+              <tr>
+                  <LeftColText>
+                      Branch Code:
+                  </LeftColText>
+                  <td>
+                      012 (Bukit Panjang Branch)
+                  </td>
+              </tr>
+          </table>
+
+
+          <Typography variant="body1" mt={3}>
+              <b>Additional Information for Overseas Transfers</b>
+          </Typography>
+          <table>
+              <tr>
+                  <LeftColText>
+                      Currency:
+                  </LeftColText>
+                  <td>
+                      SGD
+                  </td>
+              </tr>
+              <tr>
+                  <LeftColText>
+                      Country:
+                  </LeftColText>
+                  <td>
+                      Singapore
+                  </td>
+              </tr>
+              <tr>
+                  <LeftColText >
+                      Bank Address:
+                  </LeftColText>
+                  <td>
+                      UOB Plaza, 80 Raffles Place
+                  </td>
+              </tr>
+              <tr>
+                  <td></td>
+                  <td>Singapore, 048624</td>
+              </tr>
+              <tr>
+                  <LeftColText >
+                      Bank Swift Code:
+                  </LeftColText>
+                  <td>
+                      UOVBSGSG
+                  </td>
+              </tr>
+          </table>
+
+        <Typography variant="body1" mt={3}>
+          {pleaseCheckEmail}
         </Typography>
 
-        <Typography variant="h6"><b>Additional Info for Overseas Transfers</b></Typography>
-        <Typography><b>Currency:</b> SGD</Typography>
-        <Typography><b>Country:</b> Singapore </Typography>
-        <Typography><b>Bank Address:</b> UOB Plaza, 80 Raffles Place, Singapore 048624</Typography>
-        <Typography><b>Bank Swift Code:</b> UOVBSGSG</Typography>
       </ResponseContainer>
-    </ResponseContainer>
   );
 }
 

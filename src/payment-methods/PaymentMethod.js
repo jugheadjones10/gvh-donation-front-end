@@ -41,7 +41,6 @@ import { Container } from '@mui/material';
 
 import {formikInitialValues, formikValidation, formComponents} from "./fieldConstants"
 
-const test = "http://165.22.241.81:8000/donation-form";
 
 const configs = {
   paynow: {
@@ -113,13 +112,13 @@ function PaymentMethod({ method, post}) {
   });
 
   return (
-    <Accordion css={{ zIndex: 1 }}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} id="panel1a-header">
-        <Typography variant="h6">{config.title}</Typography>
+    <Accordion css={{ zIndex: 1 }}> 
+      <AccordionSummary expandIcon={<ExpandMoreIcon />} id="panel1a-header"> 
+        <Typography variant="h6">{config.title}</Typography> 
         <Typography variant="subtitle1"></Typography>
-      </AccordionSummary>
-      <Divider />
-      <AccordionDetails>
+      </AccordionSummary> 
+      <Divider /> 
+     <AccordionDetails> 
         {submitted === false && (
           <ResponseContainer maxWidth="xs"  as="form" onSubmit={formik.handleSubmit} id={method}>
 
@@ -134,10 +133,10 @@ function PaymentMethod({ method, post}) {
 
         {submitted === true && config.response(renderData)}
         {/* {config.response({refid: "111", qrUrl: "www.google.com"})} */}
-      </AccordionDetails>
+       </AccordionDetails>
 
       {submitted === false && (
-        <AccordionActions>
+         <AccordionActions>
           <ResponseContainer maxWidth="xs">
             <Tooltip title="Information from the form will allow us to record the source of the funds accurately and use them for their intended purpose. Your information will not be published publicly without your permission and your identity will be kept confidential." arrow placement="top">
               <Typography variant="body2">
@@ -161,7 +160,7 @@ function PaymentMethod({ method, post}) {
             </Button>
             <PDPA />
           </ResponseContainer>
-        </AccordionActions>
+         </AccordionActions>
       )}
       <Backdrop
         css={{
@@ -172,7 +171,7 @@ function PaymentMethod({ method, post}) {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-    </Accordion>
+     </Accordion>
   );
 }
 
