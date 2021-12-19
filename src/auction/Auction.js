@@ -219,7 +219,7 @@ function Auction() {
 
           <br/>
           <br/>
-          Do follow us on <a href="www.facebook.com/Globalvillageforhope">our Facebook page</a> for the latest updates of our Santa Mission Project. 
+          Do follow us on <a target="_blank"  href="https://www.facebook.com/globalvillageforhope/">our Facebook page</a> for the latest updates of our Santa Mission Project. 
 
           <br/>
           <br/>
@@ -248,7 +248,7 @@ function Auction() {
             return <Grid item xs={12} sm={6}  md={4}>
               <Item>
                 <Stack>
-                  <img width="100%" src={paintingData.image}/>
+                  <img width="100%" src={paintingData.image} />
                   <Box
                     sx={{
                       fontSize: 'h6.fontSize',
