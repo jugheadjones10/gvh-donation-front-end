@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React, {useState } from "react";
+import React, {useState, useEffect} from "react";
 
 //Components displayed on submission complete.
 // import OnPayNowSubmit from "./payment-methods/OnPayNowSubmit";
@@ -83,6 +83,7 @@ function App() {
   const stripe = useStripe();
   const elements = useElements();
   const theme = useTheme()
+
 
 
   return (
