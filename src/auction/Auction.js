@@ -22,8 +22,7 @@ import { useTheme } from "@mui/styles";
 import styled from "@emotion/styled";
 
 import PaymentMethod from "../payment-methods/PaymentMethod"
-
-import "./snowflakes.css"
+import Decorations from "./Decorations"
 
 import image1 from "./paintings/image1.webp"
 import image2 from "./paintings/image2.webp"
@@ -94,6 +93,7 @@ function useOneOpen(open){
   return isOneOpen
 }
 
+const disableButtons = true
 function Auction() {
   const theme = useTheme()
   const [open, setOpen] = useState([false, false, false, false, false, false, false]);
@@ -115,91 +115,7 @@ function Auction() {
       // backgroundColor: "#007c3c",
     }}>
 
-      <ul class="lightrope">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-
-      {!isOneOpen &&
-      <div class="snowflakes" aria-hidden="true">
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-      </div>
-      }
+      <Decorations displaySnow={!isOneOpen} />
 
       <Box p={8}>
         <Typography variant="h4" align="center" >
@@ -207,7 +123,15 @@ function Auction() {
           GVH Santa Mission 2021 Art Gallery
         </Typography>
 
-        <Typography variant="body1" >
+        <Typography variant="body1" fontFamily="CooperHewitt-Medium">
+
+          <br/>
+          <br/>
+          We are pleased to announce that as of 25 Dec 2021, 23:59, we have reached 100% of our required funds for Santa Mission 2021!!
+ 
+          <br/>
+          <br/>
+This Art Gallery has now stopped receiving donations. We thank you for your kind support for the children in Myanmar and Indonesia!
           <br/>
           <br/>
 
@@ -261,9 +185,12 @@ function Auction() {
                     {`from ${paintingData.from}`}
                   </Box>
 
-                  <Button onClick={() => {handleClickOpen(index)}} variant="outlined">Donate Now</Button>
+                  <Button onClick={() => {handleClickOpen(index)}} variant="outlined" disabled={disableButtons} >Donate Now</Button>
 
+                  {/* disableScrollLock property prevents the whole page from jumping up when */} 
+                  {/* the user focuses on a form field */}
                   <Dialog
+                    disableScrollLock
                     fullScreen
                     open={open[index]}
                     onClose={() => {handleClose(index)}}

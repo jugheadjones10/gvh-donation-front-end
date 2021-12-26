@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "fontsource-roboto";
+import "./index.css";
 
 import {
   BrowserRouter,
@@ -11,6 +11,7 @@ import {
   Route
 } from "react-router-dom";
 import Auction from "./auction/Auction"
+import FontsLookbook from "./FontsLookbook"
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -22,16 +23,17 @@ const stripePromise = loadStripe(
 
 ReactDOM.render(
   <React.StrictMode>
-    <Elements stripe={stripePromise}>
+    {/* <Elements stripe={stripePromise}> */}
       <ThemeProvider theme={createTheme({})}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="auction" element={<Auction />} />
+            <Route path="fontlookbook" element={<FontsLookbook/>} />
           </Routes>
         </BrowserRouter>,
       </ThemeProvider>
-    </Elements>
+    {/* </Elements> */}
   </React.StrictMode>,
   document.getElementById("root")
 );
