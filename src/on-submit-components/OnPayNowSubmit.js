@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import React from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import {ResponseContainer} from "../payment-methods/StyledComponents";
+import {ResponseContainer} from "components/StyledComponents";
 
 import { useTheme } from "@mui/styles";
 import {strings} from  "./stringConstants"
@@ -19,7 +19,7 @@ function OnPayNowSubmit({ refid }) {
       </Typography>
 
       <Typography variant="h6">Global Village for Hope UEN:</Typography>
-      <Typography variant="h3"  mb={3}>
+     <Typography variant="h3"  mb={3}>
         {gvhUEN}
       </Typography>
 

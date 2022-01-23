@@ -12,14 +12,13 @@ export const formikInitialValues = {
   amount: "",
   chequenumber: "",
   country: "",
-  type:""
 };
 
 export const formikValidation = {
   type: Yup.string().required("Required"),
   fullname: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email address").required("Required"),
-  mobilenumber: Yup.number()
+ mobilenumber: Yup.number()
   .typeError("Invalid mobile number")
   .positive("Invalid mobile number")
   .integer("Invalid mobile number")

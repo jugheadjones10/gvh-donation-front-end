@@ -21,8 +21,9 @@ import Slide from '@mui/material/Slide';
 import { useTheme } from "@mui/styles";
 import styled from "@emotion/styled";
 
-import PaymentMethod from "../payment-methods/PaymentMethod"
+import PaymentMethod from "components/PaymentMethod"
 import Decorations from "./Decorations"
+import {Title} from "components/TypographyVariants"
 
 import image1 from "./paintings/image1.webp"
 import image2 from "./paintings/image2.webp"
@@ -117,53 +118,60 @@ function Auction() {
 
       <Decorations displaySnow={!isOneOpen} />
 
-      <Box p={8}>
-        <Typography variant="h4" align="center" >
-          {/* color="#e4d9d9" */}
+      <Box py={8} px={{xs:4, md:8}}>
+        <Typography fontFamily="CooperHewitt-Semibold" fontSize={{
+          md: "h3.fontSize",
+          xs: "h4.fontSize"
+        }}
+          align="center">
           GVH Santa Mission 2021 Art Gallery
         </Typography>
 
-        <Typography variant="body1" fontFamily="CooperHewitt-Medium">
+        <Box mx={{md: 20}}>
+          <Typography fontSize="h6.fontSize" fontFamily="Fira Sans" fontWeight={400}>
 
-          <br/>
-          <br/>
-          We are pleased to announce that as of 25 Dec 2021, 23:59, we have reached 100% of our required funds for Santa Mission 2021!!
- 
-          <br/>
-          <br/>
-This Art Gallery has now stopped receiving donations. We thank you for your kind support for the children in Myanmar and Indonesia!
-          <br/>
-          <br/>
+            <br/>
+            <br/>
+            We are pleased to announce that as of 25 Dec 2021, 23:59, we have reached 100% of our required funds for Santa Mission 2021!!
 
-          Thank you so much for offering your support to this year's Santa Mission!  
+            <br/>
+            <br/>
+            This Art Gallery has now stopped receiving donations. We thank you for your kind support for the children in Myanmar and Indonesia!
+            <br/>
+            <br/>
 
-          <br/>
-          <br/>
-          Like previous years, we aim to raise <b>$4000 SGD </b> which will be used to purchase brand new T-shirts for all the 250 children we are supporting in Myanmar as well as to give them a memorable Christmas meal in this once-a-year joyous occasion. 
+            Thank you so much for offering your support to this year's Santa Mission!  
 
-          <br/>
-          <br/>
-          Do follow us on <a target="_blank"  href="https://www.facebook.com/globalvillageforhope/">our Facebook page</a> for the latest updates of our Santa Mission Project. 
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            Like previous years, we aim to raise <b>$4000 SGD </b> which will be used to purchase brand new T-shirts for all the 250 children we are supporting in Myanmar as well as to give them a memorable Christmas meal in this once-a-year joyous occasion. 
 
-          <br/>
-          <br/>
-          These art pieces are hand drawn by children from the various children homes in Myanmar which they would like to gift to donors and volunteers like yourself as a way to show their gratitude. 
+            <br/>
+            <br/>
+            Do follow us on <a target="_blank"  href="https://www.facebook.com/globalvillageforhope/">our Facebook page</a> for the latest updates of our Santa Mission Project. 
 
-          <br/>
-          <br/>
-          Out of more than 200 pictures drawn, these are the highest rated ones by our GVH volunteers and we managed to find a way to transport these physical copies to Singapore and they are with us in Singapore now! 
+            <br/>
+            <br/>
+            These art pieces are hand drawn by children from the various children homes in Myanmar which they would like to gift to donors and volunteers like yourself as a way to show their gratitude. 
 
-          <br/>
-          <br/>
-          Please click on the art pieces that you would like to donate to. If you are the highest donor of a particular art piece, we will mail the original physical version to you on behalf of the children. 
+            <br/>
+            <br/>
+            Out of more than 200 pictures drawn, these are the highest rated ones by our GVH volunteers and we managed to find a way to transport these physical copies to Singapore and they are with us in Singapore now! 
 
-          <br/>
-          <br/>
-          You may donate to more than 1 piece of art!  
+            <br/>
+            <br/>
+            Please click on the art pieces that you would like to donate to. If you are the highest donor of a particular art piece, we will mail the original physical version to you on behalf of the children. 
 
-          <br/>
-          Thank you so much to being the 'Secret Santa' of these children!
-        </Typography>
+            <br/>
+            <br/>
+            You may donate to more than 1 piece of art!  
+
+            <br/>
+            Thank you so much to being the 'Secret Santa' of these children!
+          </Typography>
+        </Box>
       </Box>
 
       <Grid container alignItems="center" >
@@ -180,9 +188,12 @@ This Art Gallery has now stopped receiving donations. We thank you for your kind
                       color: "text.secondary",
                     }}
                   >
-                    {`${paintingData.painter}, ${paintingData.age}`}
-                    <br/>
-                    {`from ${paintingData.from}`}
+                    <Typography fontSize="h6.fontSize" fontFamily="Fira Sans" fontWeight={600}>
+                      {`${paintingData.painter}, ${paintingData.age}`}
+                    </Typography>
+                    <Typography fontSize="subtitle1.fontSize" fontFamily="Fira Sans" fontWeight={300}>
+                      {`from ${paintingData.from}`}
+                    </Typography>
                   </Box>
 
                   <Button onClick={() => {handleClickOpen(index)}} variant="outlined" disabled={disableButtons} >Donate Now</Button>

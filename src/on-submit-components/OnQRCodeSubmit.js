@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
 // import {Container, containerCss} from "../payment-methods/StyledComponents";
-import {ResponseContainer} from "../payment-methods/StyledComponents";
+import {ResponseContainer} from "components/StyledComponents";
 import paynowapps from "./paynowapps.png";
 
 import { formComponentsStyles } from "../form-components/FormComponents";

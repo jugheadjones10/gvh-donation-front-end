@@ -3,10 +3,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import FullName from "../form-components/FullName"
-import Email from "../form-components/Email"
+   import Email from "../form-components/Email"
 import MobileNumber from "../form-components/MobileNumber"
 import Project from "../form-components/Project"
 import Amount from "../form-components/Amount"
+import ChequeNumber from "../form-components/ChequeNumber"
 import PDPA from "../form-components/PDPA"
 
 import Accordion from '@mui/material/Accordion';
@@ -18,9 +19,7 @@ import AccordionActions from '@mui/material/AccordionActions';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 
-import QRCodeImage from "./QRCode.jpg"
-
-function QRCode({ classes, formikInitialValues, formikValidation, fetchFromFormServer }) {
+function Cheque({ classes, formikInitialValues, formikValidation, fetchFromFormServer }) {
     const [refid, setRefid] = useState(null);
 
     const formik = useFormik({
@@ -29,18 +28,22 @@ function QRCode({ classes, formikInitialValues, formikValidation, fetchFromFormS
             ...formikValidation,
             amount: Yup
                 .number()
-                .typeError("Invalid donation amount"),
+                .typeError("Invalid donation amount")
+                .required('Required'),
             chequenumber: Yup
-                .number(),
+                .number()
+                .typeError("Invalid cheque number")
+                .required('Required'),
             country: Yup
-                .string(),
+                .string()
         }),
         onSubmit: values => {
-            fetchFromFormServer(values)
-                .then(res => res.text()
-                ).then(res => {
-                    setRefid(res)
-                })
+            fetchFromFormServer(
+                values
+            ).then(res => res.text()
+            ).then(res => {
+                setRefid(res)
+            })
         },
     });
 
@@ -50,7 +53,7 @@ function QRCode({ classes, formikInitialValues, formikValidation, fetchFromFormS
                 expandIcon={<ExpandMoreIcon />}
                 id="panel1a-header">
 
-                <Typography className={classes.heading}>PayLah/PayAnyone with QR Code</Typography>
+                <Typography className={classes.heading}>Cheque</Typography>
                 <Typography className={classes.secondaryHeading}></Typography>
 
             </AccordionSummary>
@@ -59,7 +62,7 @@ function QRCode({ classes, formikInitialValues, formikValidation, fetchFromFormS
 
                 {refid === null &&
 
-                    <form onSubmit={formik.handleSubmit} className={classes.container} id="qrcodeform">
+                    <form onSubmit={formik.handleSubmit} className={classes.container} id="chequeform">
                         <FullName className={classes.textField} formik={formik} />
                         <Email className={classes.textField} formik={formik} />
                         <MobileNumber className={classes.textField} formik={formik} />
@@ -68,8 +71,8 @@ function QRCode({ classes, formikInitialValues, formikValidation, fetchFromFormS
                         <input type="hidden" id="type" {...formik.getFieldProps('type')} />
 
                         <Amount className={classes.textField} formik={formik} />
+                        <ChequeNumber className={classes.textField} formik={formik} />
 
-                        <input type="hidden" id="chequenumber" {...formik.getFieldProps('chequenumber')} />
                         <input type="hidden" id="country" {...formik.getFieldProps('country')} />
 
                         <PDPA classes={classes} />
@@ -80,17 +83,20 @@ function QRCode({ classes, formikInitialValues, formikValidation, fetchFromFormS
                     refid !== null &&
 
                     <div className={classes.container}>
-                        <img src={QRCodeImage} style={{ width: "60%" }} alt=""></img>
+                        <Typography className={classes.normalText}>
+                            Kindly drop the cheque off at any UOB Branch and include this account number <b>(324-310-964-5)</b> on the back of the cheque.
+                        </Typography>
                     </div>
 
                 }
+
 
             </AccordionDetails>
 
             {
                 refid === null &&
                 <AccordionActions className={classes.container}>
-                    <Button style={{ marginBottom: "20px" }} variant="contained" size="medium" color="primary" type="submit" form="qrcodeform">Submit</Button>
+                    <Button style={{ marginBottom: "20px" }} variant="contained" size="medium" color="primary" type="submit" form="chequeform">Submit</Button>
                 </AccordionActions>
             }
 
@@ -98,4 +104,4 @@ function QRCode({ classes, formikInitialValues, formikValidation, fetchFromFormS
     );
 }
 
-export default QRCode;
+export default Cheque;

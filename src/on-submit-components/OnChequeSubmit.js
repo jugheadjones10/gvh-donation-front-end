@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-import {ResponseContainer} from "../payment-methods/StyledComponents";
+import {ResponseContainer} from "components/StyledComponents";
 
 function OnChequeSubmit({ refid }) {
   return (
