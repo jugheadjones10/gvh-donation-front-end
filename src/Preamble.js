@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 import React from "react";
 
-import {BodyText} from "components/TypographyVariants";
+import { BodyText } from "components/TypographyVariants";
 
 import Box from "@mui/material/Box";
 
@@ -18,7 +18,7 @@ function Preamble() {
         Your information will not be published publicly without your permission
         and your identity will be kept confidential. <br />
         <br />
-        Feel free to email us at 
+        Feel free to email us at
         <a
           css={{
             textDecoration: "none",
@@ -26,9 +26,9 @@ function Preamble() {
           }}
           href="mailto:Globalvillageforhope@gmail.com"
         >
-          <b css={{fontWeight: 600}}> Globalvillageforhope@gmail.com </b>
+          <b css={{ fontWeight: 600 }}> Globalvillageforhope@gmail.com </b>
         </a>
-         or Whatsapp us at <b css={{fontWeight: 600}}>+65 88224918</b> if you
+        or Whatsapp us at <b css={{ fontWeight: 600 }}>+65 88224918</b> if you
         would like to seek clarifications. <br />
       </BodyText>
     </Box>

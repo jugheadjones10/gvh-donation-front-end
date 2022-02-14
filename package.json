@@ -18,6 +18,7 @@
     "formik": "^2.2.6",
     "history": "^5.1.0",
     "paynowqr": "^1.1.2",
+    "prop-types": "^15.8.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^6.0.2",
@@ -32,10 +33,21 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "plugins": ["react"],
-    "extends": ["react-app", "react-app/jest", "plugin:react/all", "prettier"],
+    "plugins": [
+      "react"
+    ],
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "prettier"
+    ],
     "rules": {
-      "react/jsx-filename-extension": 0
+      "react/jsx-filename-extension": 0,
+      "react/prop-types": 1,
+      "react/no-unescaped-entities": 1,
+      "no-unused-vars": 1
     },
     "settings": {
       "react": {
@@ -44,7 +56,11 @@
     }
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

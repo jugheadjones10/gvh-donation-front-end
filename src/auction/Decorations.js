@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
-import "./snowflakes.css"
+import React, { useEffect, useState } from "react";
+import "./snowflakes.css";
 
-function Decorations({displayLights = true, displaySnow}) {
-
+function Decorations({ displayLights = true, displaySnow }) {
   return (
     <>
-      <ul class="lightrope">
+      <ul className="lightrope">
         <li></li>
         <li></li>
         <li></li>
@@ -50,46 +49,22 @@ function Decorations({displayLights = true, displaySnow}) {
         <li></li>
       </ul>
 
-      {displaySnow &&
-      <div class="snowflakes" aria-hidden="true">
-        <div class="snowflake">
-          ❅
+      {displaySnow && (
+        <div className="snowflakes" aria-hidden="true">
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
         </div>
-        <div class="snowflake">
-          ❆
-        </div>
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-        <div class="snowflake">
-          ❅
-        </div>
-        <div class="snowflake">
-          ❆
-        </div>
-      </div>
-      }
+      )}
     </>
   );
 }

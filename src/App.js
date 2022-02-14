@@ -26,9 +26,7 @@ function App() {
 function getClientSecret(amount) {
   return fetch("http://165.22.241.81:8000/secret", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ amount: amount }),
   })
     .then(function (response) {
@@ -54,9 +52,10 @@ function formSubmit(values) {
     },
     body: JSON.stringify(values, null, 2),
   })
-    .then((res) => res.text())
+    .then((res) => res.json())
     .then((res) => {
-      return { refid: res };
+      console.log(JSON.stringify(res));
+      return { refid: res.ID, qrUrl: res.qrUrl };
     });
 }
 

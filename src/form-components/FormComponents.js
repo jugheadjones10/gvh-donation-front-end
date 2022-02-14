@@ -17,9 +17,9 @@ export const formComponentsStyles = function (theme) {
     marginBottom: "5px",
     [theme.breakpoints.up("sm")]: {
       width: "40%",
-   },
+    },
     [theme.breakpoints.down("sm")]: {
-     width: "80%",
+      width: "80%",
     },
   };
 };
@@ -57,8 +57,10 @@ export function FormSelection({ id, label, formik, optionValues }) {
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        {optionValues.map((value) => (
-          <MenuItem value={value}>{value}</MenuItem>
+        {optionValues.map((value, index) => (
+          <MenuItem key={index} value={value}>
+            {value}
+          </MenuItem>
         ))}
       </Select>
       {formik.touched.project && formik.errors[id] ? (
