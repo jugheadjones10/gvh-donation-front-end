@@ -23,28 +23,23 @@ function App() {
   );
 }
 
-function getClientSecret(amount) {
-  return fetch("http://165.22.241.81:8000/secret", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ amount: amount }),
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (responseJson) {
-      return responseJson.client_secret;
-    })
-    .catch((err) => alert("First steP" + err));
-}
+// function getClientSecret(amount) {
+//   return fetch("http://165.22.241.81:8000/secret", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ amount: amount }),
+//   })
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (responseJson) {
+//       return responseJson.client_secret;
+//     })
+//     .catch((err) => alert("First steP" + err));
+// }
 
 function formSubmit(values) {
-  const api =
-    process.env.NODE_ENV === "development"
-      ? process.env.REACT_APP_DEV_FORM_SUBMISSION
-      : process.env.REACT_APP_PROD_FORM_SUBMISSION;
-
-  return fetch(api, {
+  return fetch(process.env.REACT_APP_DEV_SERVER + "/donation-form", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

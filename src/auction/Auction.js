@@ -69,14 +69,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function auctionSubmit(values, painterData) {
-  const api =
-    process.env.NODE_ENV === "development"
-      ? process.env.REACT_APP_DEV_AUCTION
-      : process.env.REACT_APP_PROD_AUCTION;
-
   values.painter = painterData.painter;
 
-  return fetch(api, {
+  return fetch(process.env.REACT_APP_DEV_SERVER + "/auction", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

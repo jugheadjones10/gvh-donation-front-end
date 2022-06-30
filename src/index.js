@@ -1,25 +1,25 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
+
 import reportWebVitals from "./reportWebVitals";
-import "fontsource-roboto";
+import theme from "./theme";
+
 import "./index.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import App from "./App";
-
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
+
 // import { Elements } from "@stripe/react-stripe-js";
 // import { loadStripe } from "@stripe/stripe-js";
 // const stripePromise = loadStripe(
 //   "pk_test_51JYP6bJ0vgYGBOQWTZGdEkcNXUIeB0Lq0SdSU4dlH9ZnROmzQLiOMUbkZKhckGSVVGH1tRfYEE7IwW3gQ8NsGL1N00PEYZQ9o9"
 // );
 
-import CircularProgress from "@mui/material/CircularProgress";
-import Backdrop from "@mui/material/Backdrop";
-
+import App from "./App";
 const Auction = React.lazy(() => import("./auction/Auction"));
 
 ReactDOM.render(
@@ -46,7 +46,6 @@ ReactDOM.render(
           />
         </Routes>
       </BrowserRouter>
-      ,
     </ThemeProvider>
     {/* </Elements> */}
   </React.StrictMode>,
@@ -55,7 +54,7 @@ ReactDOM.render(
 
 function RouteSuspense(props) {
   return (
-    <React.Suspense
+    <Suspense
       fallback={
         <Backdrop
           css={{
@@ -68,7 +67,7 @@ function RouteSuspense(props) {
       }
     >
       {props.children}
-    </React.Suspense>
+    </Suspense>
   );
 }
 // If you want to start measuring performance in your app, pass a function
