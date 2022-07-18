@@ -86,7 +86,7 @@ function PaymentMethod({ method, post }) {
         )}
 
         {submitted === true && config.response(renderData)}
-        {/* {config.response({refid: "111", qrUrl: "www.google.com"})} */}
+        {/* {config.response({ refid: "111", qrUrl: "www.google.com" })} */}
       </AccordionDetails>
 
       {submitted === false && (

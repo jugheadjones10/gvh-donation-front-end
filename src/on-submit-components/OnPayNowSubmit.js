@@ -4,23 +4,48 @@ import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Box from "@mui/material/Box";
 import { ResponseContainer } from "components/StyledComponents";
+import PaymentConfirmation from "./PaymentConfirmation";
 
 import { useTheme } from "@mui/styles";
 import { strings } from "./stringConstants";
 
 import socketIOClient from "socket.io-client";
-const { gvhUEN, pleaseCheckEmail } = strings;
+const {
+  gvhUEN,
+  pleaseCheckEmail,
+  TALLYSUCCESS,
+  MOREPENDINGTHANCONFIRMED,
+  ONEPENDINGANDNOCONFIRMED,
+  tallySuccessMessage,
+  morePendingMessage,
+  onePendingMessage,
+  unknownErrorMessage,
+} = strings;
 
 function OnPayNowSubmit({ refid }) {
   const theme = useTheme();
-  const [reconciled, setReconciled] = useState(false);
+  const [reconciled, setReconciled] = useState(null);
 
   useEffect(() => {
     const socket = socketIOClient(process.env.REACT_APP_DEV_SERVER);
     socket.on("update", (data) => {
-      console.log("Updated");
-      setReconciled(true);
+      console.log("Socket update: ", data);
+      let returnedText;
+      if (data === TALLYSUCCESS) {
+        returnedText = tallySuccessMessage;
+      } else if (data === MOREPENDINGTHANCONFIRMED) {
+        returnedText = morePendingMessage;
+      } else if (data === ONEPENDINGANDNOCONFIRMED) {
+        returnedText = onePendingMessage;
+      } else {
+        returnedText = unknownErrorMessage;
+      }
+      setReconciled(returnedText);
     });
   }, []);
 
@@ -38,9 +63,8 @@ function OnPayNowSubmit({ refid }) {
 
       <Typography variant="body1">
         Input the above UEN in your online banking app to transfer your
-        donation. Under the reference number field, please key in the above
-        reference ID.
-        {/* See the below screenshot for an example. */}
+        donation. Under the reference number/comments field,{" "}
+        <b>please key in the above reference ID.</b>
         <br />
         <br />
         Banks that support PayNow through UEN include{" "}
@@ -50,17 +74,7 @@ function OnPayNowSubmit({ refid }) {
         .
       </Typography>
 
-      {!reconciled && <CircularProgress color="inherit" />}
-      {reconciled && (
-        <Typography variant="body1">
-          <br />
-          We have successfully received your payment! A receipt has been mailed
-          to your email. Please check the spam folder if you do not see the
-          email.
-          <br />
-          <br />
-        </Typography>
-      )}
+      <PaymentConfirmation reconciled={reconciled} />
 
       {/* <img */}
       {/*   css={{ margin: theme.spacing(3) }} */}
@@ -73,8 +87,6 @@ function OnPayNowSubmit({ refid }) {
       {/*       : process.env.REACT_APP_PROD_SERVER + "/uenscreenshot.png" */}
       {/*   } */}
       {/* /> */}
-
-      <Typography variant="body1">{pleaseCheckEmail}</Typography>
     </ResponseContainer>
   );
 }

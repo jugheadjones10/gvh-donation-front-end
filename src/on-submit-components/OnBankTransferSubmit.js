@@ -2,17 +2,47 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
 import { ResponseContainer } from "components/StyledComponents";
+import PaymentConfirmation from "./PaymentConfirmation";
 import { LeftColText } from "components/StyledComponents";
 
+import socketIOClient from "socket.io-client";
 import { strings } from "./stringConstants";
-const { pleaseCheckEmail } = strings;
+import CircularProgress from "@mui/material/CircularProgress";
+const {
+  pleaseCheckEmail,
+  TALLYSUCCESS,
+  MOREPENDINGTHANCONFIRMED,
+  ONEPENDINGANDNOCONFIRMED,
+  tallySuccessMessage,
+  morePendingMessage,
+  onePendingMessage,
+  unknownErrorMessage,
+} = strings;
 
 function OnBankTransferSubmit({ refid }) {
+  const [reconciled, setReconciled] = useState(null);
+  useEffect(() => {
+    const socket = socketIOClient(process.env.REACT_APP_DEV_SERVER);
+    socket.on("update", (data) => {
+      console.log("Socket update: ", data);
+      let returnedText;
+      if (data === TALLYSUCCESS) {
+        returnedText = tallySuccessMessage;
+      } else if (data === MOREPENDINGTHANCONFIRMED) {
+        returnedText = morePendingMessage;
+      } else if (data === ONEPENDINGANDNOCONFIRMED) {
+        returnedText = onePendingMessage;
+      } else {
+        returnedText = unknownErrorMessage;
+      }
+      setReconciled(returnedText);
+    });
+  }, []);
   return (
     <ResponseContainer maxWidth="xs">
       <Typography variant="h6">Here is your Reference ID :</Typography>
@@ -74,9 +104,7 @@ function OnBankTransferSubmit({ refid }) {
         </tr>
       </table>
 
-      <Typography variant="body1" mt={3}>
-        {pleaseCheckEmail}
-      </Typography>
+      <PaymentConfirmation reconciled={reconciled} />
     </ResponseContainer>
   );
 }
