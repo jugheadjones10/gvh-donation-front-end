@@ -113,6 +113,7 @@ function PaymentMethod({ method, post }) {
               size="medium"
               type="submit"
               variant="contained"
+              data-test-id={method + "button"}
             >
               Submit
             </Button>

@@ -20,10 +20,10 @@ const {
   pleaseCheckEmail,
   TALLYSUCCESS,
   MOREPENDINGTHANCONFIRMED,
-  ONEPENDINGANDNOCONFIRMED,
+  NOCONFIRMED,
   tallySuccessMessage,
   morePendingMessage,
-  onePendingMessage,
+  noConfirmedMessage,
   unknownErrorMessage,
 } = strings;
 
@@ -40,8 +40,8 @@ function OnPayNowSubmit({ refid }) {
         returnedText = tallySuccessMessage;
       } else if (data === MOREPENDINGTHANCONFIRMED) {
         returnedText = morePendingMessage;
-      } else if (data === ONEPENDINGANDNOCONFIRMED) {
-        returnedText = onePendingMessage;
+      } else if (data === NOCONFIRMED) {
+        returnedText = noConfirmedMessage;
       } else {
         returnedText = unknownErrorMessage;
       }
@@ -52,7 +52,7 @@ function OnPayNowSubmit({ refid }) {
   return (
     <ResponseContainer maxWidth="xs">
       <Typography variant="h6">Here is your Reference ID :</Typography>
-      <Typography variant="h3" mb={3}>
+      <Typography data-test-id="refid" variant="h3" mb={3}>
         {refid}
       </Typography>
 

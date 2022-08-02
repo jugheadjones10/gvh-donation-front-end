@@ -8,12 +8,11 @@
     "@mui/icons-material": "^5.0.0-rc.0",
     "@mui/material": "^5.0.0-rc.1",
     "@mui/styles": "^5.0.0-rc.1",
-    "@stripe/react-stripe-js": "^1.1.2",
-    "@stripe/stripe-js": "^1.11.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "easyqrcodejs": "^4.4.7",
+    "env-cmd": "^10.1.0",
     "fontsource-roboto": "^4.0.0",
     "formik": "^2.2.6",
     "history": "^5.1.0",
@@ -31,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "e2e": "env-cmd -f .env.test react-scripts start"
   },
   "eslintConfig": {
     "plugins": [

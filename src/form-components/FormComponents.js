@@ -52,13 +52,13 @@ export function FormSelection({ id, label, formik, optionValues }) {
       margin="none"
       error={formik.touched.project && formik.errors.project ? true : false}
     >
-      <InputLabel id={id}>{label}</InputLabel>
-      <Select labelId={id} id={id} {...formik.getFieldProps(id)}>
+      <InputLabel id={id + "label"}>{label}</InputLabel>
+      <Select labelId={id + "label"} id={id} {...formik.getFieldProps(id)}>
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
         {optionValues.map((value, index) => (
-          <MenuItem key={index} value={value}>
+          <MenuItem data-test-id={id + value} key={index} value={value}>
             {value}
           </MenuItem>
         ))}

@@ -20,10 +20,10 @@ const {
   pleaseCheckEmail,
   TALLYSUCCESS,
   MOREPENDINGTHANCONFIRMED,
-  ONEPENDINGANDNOCONFIRMED,
+  NOCONFIRMED,
   tallySuccessMessage,
   morePendingMessage,
-  onePendingMessage,
+  noConfirmedMessage,
   unknownErrorMessage,
 } = strings;
 
@@ -40,8 +40,8 @@ function OnQRCodeSubmit({ refid, qrUrl }) {
         returnedText = tallySuccessMessage;
       } else if (data === MOREPENDINGTHANCONFIRMED) {
         returnedText = morePendingMessage;
-      } else if (data === ONEPENDINGANDNOCONFIRMED) {
-        returnedText = onePendingMessage;
+      } else if (data === NOCONFIRMED) {
+        returnedText = noConfirmedMessage;
       } else {
         returnedText = unknownErrorMessage;
       }

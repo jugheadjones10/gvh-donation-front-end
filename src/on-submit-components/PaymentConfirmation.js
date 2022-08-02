@@ -9,10 +9,10 @@ function PaymentConfirmation({ reconciled }) {
   return (
     <Card variant="outlined" sx={{ m: 4 }}>
       <CardContent>
-        <Typography variant="h6">
+        <Typography data-test-id="payment-confirmation" variant="h6">
           {reconciled
             ? reconciled
-            : "Waiting for your payment...this donation intent will expire in 5 minutes"}
+            : "Thank you for your contribution! Please donate within the next 5 minutes so that your donation can be processed"}
         </Typography>
 
         {!reconciled && (
